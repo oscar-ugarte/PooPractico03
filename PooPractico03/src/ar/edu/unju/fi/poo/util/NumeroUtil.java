@@ -28,7 +28,7 @@ public class NumeroUtil
 	 */
 	public static String redondearImporte(Double importe)
 	{
-		return "$ " + String.format("%.2f", importe) ; 
+		return String.format ("%.0f", importe) ; 
 	}
 	
 	
