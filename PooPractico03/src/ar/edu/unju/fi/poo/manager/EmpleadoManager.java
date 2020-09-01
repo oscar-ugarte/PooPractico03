@@ -12,8 +12,9 @@ import ar.edu.unju.fi.poo.dominio.Empleado;
  */
 public class EmpleadoManager
 {
-	private static List<Empleado> listaEmpleado = new ArrayList<Empleado>();
-
+	private static List<Empleado> listaDeEmpleados = new ArrayList<Empleado>(); //La lista de empleados principal
+	private static List<Empleado> segundaListaDeEmpleados = new ArrayList<Empleado>(); //La segunda lista para el punto 5.
+	
 	/**
 	 * Genera 6 Empleados y los carga a la <code>Collection Empleado</code>
 	 */
@@ -24,24 +25,23 @@ public class EmpleadoManager
 		Empleado e4 = new Empleado(1000,"34600004","Maria Fernandez",new Date(), 50000.00, 7);
 		Empleado e5 = new Empleado(1001,"34600005","Augusto Cruz",new Date(), 28000.00, 3);
 		Empleado e6 = new Empleado(1002,"34600006","Maria Flores",new Date(), 35000.00, 2);
-		listaEmpleado.add(e1);
-		listaEmpleado.add(e2);
-		listaEmpleado.add(e3);
-		listaEmpleado.add(e4);
-		listaEmpleado.add(e5);
-		listaEmpleado.add(e6);
+		listaDeEmpleados.add(e1);
+		listaDeEmpleados.add(e2);
+		listaDeEmpleados.add(e3);
+		listaDeEmpleados.add(e4);
+		listaDeEmpleados.add(e5);
+		listaDeEmpleados.add(e6);
 	}	
 	
 	/**
-	 * Agrega un nuevo empleado a la lista pasado por parametros y devuelve la lista original actualizada.
+	 * Agrega un nuevo empleado a la segunda lista de empleados.
 	 * @param lista
 	 * @param nuevoEmpleado
 	 * @return
 	 */
-	public static List<Empleado> agregarUnEmpleado(List<Empleado> lista, Empleado nuevoEmpleado )
+	public static void agregarUnEmpleado( Empleado nuevoEmpleado )
 	{
-		lista.add(nuevoEmpleado);
-		return lista ;
+		segundaListaDeEmpleados.add(nuevoEmpleado);
 	}
 
 	/**
@@ -52,22 +52,33 @@ public class EmpleadoManager
 	 */
 	public static void quitarUnEmpleado(Empleado empleadoEliminado )
 	{
-		listaEmpleado.remove(empleadoEliminado);
+		listaDeEmpleados.remove(empleadoEliminado);
 	}	
 	
 	/**
-	 * Muestra la lista de empleados del manager.
+	 * Muestra la lista primera lista de empleados del manager.
 	 */
-	public static void mostrarEmpleados()
+	public static void mostrarPrimeraListaDeEmpleados()
 	{
-		for(Empleado empleado: listaEmpleado)
+		for(Empleado empleado: listaDeEmpleados)
 		{
 			System.out.println(empleado);
 		}
 	}
 	
 	/**
-	 * Muestra el contenido de la lista pasada por parametro.
+	 * Muestra la lista segunda lista de empleados del manager.
+	 */
+	public static void mostrarSegundaListaDeEmpleados()
+	{
+		for(Empleado empleado: segundaListaDeEmpleados)
+		{
+			System.out.println(empleado);
+		}
+	}	
+	
+	/**
+	 * Muestra el contenido de la primera lista pasada por parametro.
 	 * @param lista
 	 */
 	public static void mostrarEmpleados(List<Empleado> lista )
@@ -85,7 +96,7 @@ public class EmpleadoManager
 	 */
 	public static void mostrarEmpleadosPorAntiguedad(Integer antiguedad)
 	{
-		for(Empleado empleado: listaEmpleado) {
+		for(Empleado empleado: listaDeEmpleados) {
 			if( empleado.getAntiguedad() > antiguedad )
 				System.out.println(empleado);
 		}
@@ -99,7 +110,7 @@ public class EmpleadoManager
 	 * @return
 	 */
 	public static Empleado buscarPorDni(String dni) {
-		for(Empleado empleado: listaEmpleado) {
+		for(Empleado empleado: listaDeEmpleados) {
 			if(empleado.getDni().equals(dni))
 				return empleado;
 		}
@@ -115,7 +126,7 @@ public class EmpleadoManager
 	public static List<Empleado> buscarEmpleadosPorNombre( String valorDelNombre )
 	{
 		List<Empleado> listaEmpleadosEncontrados = new ArrayList<Empleado>();
-		for(Empleado empleado : listaEmpleado)
+		for(Empleado empleado : listaDeEmpleados)
 		{
 			if (empleado.getNombre().contains( valorDelNombre ) )
 			{
@@ -134,7 +145,7 @@ public class EmpleadoManager
 	public static Double obtenerSumatoriaDeSalariosPorAntiguedad(Integer antiguedad)
 	{
 		Double sumatoriaDeSalarios = 0.0 ;
-		for(Empleado empleado : listaEmpleado)
+		for(Empleado empleado : listaDeEmpleados)
 		{
 			if(empleado.getAntiguedad() > antiguedad)
 				sumatoriaDeSalarios = sumatoriaDeSalarios + empleado.getSalario() ;
@@ -164,10 +175,10 @@ public class EmpleadoManager
 	public static Double obtenerPromedioDeLosSalariosDeTodosLosEmpleados( )
 	{
 		Double promedio = 0.0 ;
-		for(Empleado empleado : listaEmpleado)
+		for(Empleado empleado : listaDeEmpleados)
 		{
 			promedio = promedio + empleado.getSalario();
 		}
-		return promedio / listaEmpleado.size();
+		return promedio / listaDeEmpleados.size();
 	}
 }
